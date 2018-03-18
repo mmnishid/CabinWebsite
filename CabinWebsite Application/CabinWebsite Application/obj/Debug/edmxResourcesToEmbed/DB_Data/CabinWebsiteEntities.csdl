@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CabinWebsiteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="calendar">
+    <Key>
+      <PropertyRef Name="calendarID" />
+    </Key>
+    <Property Name="calendarID" Type="Guid" Nullable="false" />
+    <Property Name="userID" Type="Int32" Nullable="false" />
+    <Property Name="dateAdded" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="reservedDate" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
+  <EntityType Name="location">
+    <Key>
+      <PropertyRef Name="locationID" />
+    </Key>
+    <Property Name="locationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="country" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+    <Property Name="state" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+    <Property Name="city" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+    <Property Name="signupKey" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="message">
+    <Key>
+      <PropertyRef Name="messageID" />
+    </Key>
+    <Property Name="messageID" Type="Guid" Nullable="false" />
+    <Property Name="userID" Type="Int32" Nullable="false" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="body" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="CabinWebsiteEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="calendars" EntityType="Self.calendar" />
+    <EntitySet Name="locations" EntityType="Self.location" />
+    <EntitySet Name="messages" EntityType="Self.message" />
+    <EntitySet Name="users" EntityType="CabinWebsiteModel.user" />
+  </EntityContainer>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="userID" />
+    </Key>
+    <Property Name="userID" Type="Int32" Nullable="false" />
+    <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+  </EntityType>
+</Schema>

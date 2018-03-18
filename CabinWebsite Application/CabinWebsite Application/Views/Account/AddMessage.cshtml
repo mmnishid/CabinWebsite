@@ -1,0 +1,111 @@
+﻿@model CabinWebsite_Application.Models.NewMessageModel
+
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-xs-8 col-xs-offset-2">
+        <h2 id="add-item-title" class="text-center">Add a New Story</h2>
+        <script>$('#producerTransNav').addClass('active');</script>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            bool writeHasEnough = true;
+            if (!ViewData.ModelState.IsValid)
+            {
+                <div class="validation-summary-errors panel panel-danger"
+                     data-valmsg-summary="true">
+                    <div class="panel-heading">
+                        <center><strong>Cannot add this Story. Please try again later</strong></center>
+                        @if (ViewData.ModelState["Consumer"] != null && ViewData.ModelState["Consumer"].Errors.Count() >= 1)
+                        {
+                            writeHasEnough = false;
+                        }
+                    </div>
+                </div><br />
+            }
+
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-lg-3 col-md-3 col-xs-12">
+                        @Html.LabelFor(m => m.title, new { @class = "control-label transaction-label" })
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-xs-12">
+                        @Html.TextAreaFor(m => m.title, new { @class = "form-control", @placeholder = "Title", @rows = "4", @cols = "40", @id = "titleInput" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-lg-3 col-md-3 col-xs-12">
+                        @Html.LabelFor(m => m.body, new { @class = "control-label transaction-label" })
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-xs-12">
+                        @Html.TextAreaFor(m => m.body, new { @class = "form-control", @placeholder = "Boby", @rows = "4", @cols = "40", @id = "bodyInput" })
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-lg-12 col-md-12 col-xs-12" style="text-align:center;">
+                        <button class="btn btn-primary" type="submit" value="Submit">Submit</button>
+                        <button class="btn btn-default" onclick="confirmBack()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @*This handles the update to producer items*@
+    <script type="text/javascript">
+        $("#producer-dropdown").change(function (e) {
+            var currentChoice = $(this).val();
+            console.log(currentChoice);
+            if (currentChoice) {
+                //Transfer the list of items to an array before finding where to put them in the DOM, that way I can just drop it all in together.
+                var temp = [];
+                $.ajax({
+                    url: "/Account/FetchProducerItems/",
+                    type: "get",
+                    data: { name: currentChoice },
+                    success: function (result) {
+                        if (result) {
+                            //For each result we get, store a string in our temp array of what we need the html to look like.
+                            $.each(result.products, function (idx, str) {
+                                temp.push('<option value="' + str + '">' + str + '</option>');
+                            });
+                            //Empty the current list of items
+                            $('#product-dropdown').find('option').remove();
+                            //Drop in our array of strings
+                            $('#product-dropdown').empty().append(temp.join(''));
+                        }
+                        else {
+                            $('#product-dropdown').find('option').remove();
+
+                            $('#product-dropdown').empty().append("Select a user to see their products.");
+                        }
+                    },
+                    error: function (result) {
+                        console.log("Error receiving list of products owned by: " + currentChoice);
+                    }
+                });
+            } else {
+                $('#product-dropdown').find('option').remove();
+            }
+        }).trigger('change');
+    </script>
+
+    @*This is to handle the satisfaction rating*@
+    <script type="text/javascript">
+        $(function () {
+            $('img').tooltip({ placement: 'bottom' });
+        });
+        $('#satisfaction-rating-radios input:radio').addClass('input_hidden');
+        $('#satisfaction-rating-radios label').click(function () {
+            $(this).addClass('selected').siblings().removeClass('selected');
+        });
+    </script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

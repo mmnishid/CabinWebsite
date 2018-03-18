@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CabinWebsiteModelStoreContainer" CdmEntityContainer="CabinWebsiteEntities">
+    <EntitySetMapping Name="calendars">
+      <EntityTypeMapping TypeName="CabinWebsiteModel.calendar">
+        <MappingFragment StoreEntitySet="calendar">
+          <ScalarProperty Name="calendarID" ColumnName="calendarID" />
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="dateAdded" ColumnName="dateAdded" />
+          <ScalarProperty Name="reservedDate" ColumnName="reservedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="locations">
+      <EntityTypeMapping TypeName="CabinWebsiteModel.location">
+        <MappingFragment StoreEntitySet="location">
+          <ScalarProperty Name="locationID" ColumnName="locationID" />
+          <ScalarProperty Name="country" ColumnName="country" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="signupKey" ColumnName="signupKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="messages">
+      <EntityTypeMapping TypeName="CabinWebsiteModel.message">
+        <MappingFragment StoreEntitySet="message">
+          <ScalarProperty Name="messageID" ColumnName="messageID" />
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="body" ColumnName="body" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="CabinWebsiteModel.user">
+        <MappingFragment StoreEntitySet="user">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="lastname" ColumnName="lastname" />
+          <ScalarProperty Name="firstname" ColumnName="firstname" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="userID" ColumnName="userID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="dadfbe43011249abbdf3b0e76e58c84c" Name="Diagram1">
+        <EntityTypeShape EntityType="CabinWebsiteModel.message" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CabinWebsiteModel.newsboard" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CabinWebsiteModel.reservation" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CabinWebsiteModel.user" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CabinWebsiteModel.Version" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="CabinWebsiteModel.FK__message__created__0519C6AF" ManuallyRouted="false" />
+        <AssociationConnector Association="CabinWebsiteModel.FK__message__sentTo__060DEAE8" ManuallyRouted="false" />
+        <AssociationConnector Association="CabinWebsiteModel.FK__newsboard__creat__0AD2A005" ManuallyRouted="false" />
+        <AssociationConnector Association="CabinWebsiteModel.FK__reservati__creat__0F975522" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

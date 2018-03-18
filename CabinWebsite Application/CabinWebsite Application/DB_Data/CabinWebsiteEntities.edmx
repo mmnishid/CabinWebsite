@@ -1,0 +1,350 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CabinWebsiteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="message">
+          <Key>
+            <PropertyRef Name="messageID" />
+          </Key>
+          <Property Name="messageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="55" Nullable="false" />
+          <Property Name="body" Type="varchar" MaxLength="1000" />
+          <Property Name="createdDate" Type="datetime" Nullable="false" />
+          <Property Name="createdBy" Type="int" Nullable="false" />
+          <Property Name="sentTo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="newsboard">
+          <Key>
+            <PropertyRef Name="newsboardID" />
+          </Key>
+          <Property Name="newsboardID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="55" Nullable="false" />
+          <Property Name="body" Type="varchar" MaxLength="1000" />
+          <Property Name="createdDate" Type="datetime" Nullable="false" />
+          <Property Name="createdBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="reservation">
+          <Key>
+            <PropertyRef Name="reservationID" />
+          </Key>
+          <Property Name="reservationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="reservationDate" Type="datetime" Nullable="false" />
+          <Property Name="createdDate" Type="datetime" Nullable="false" />
+          <Property Name="createdBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vendorCode" Type="int" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="55" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="200" />
+          <Property Name="firstName" Type="varchar" MaxLength="55" />
+          <Property Name="lastName" Type="varchar" MaxLength="55" />
+          <Property Name="status" Type="int" Nullable="false" />
+          <Property Name="lastLogin" Type="datetime" />
+          <Property Name="prevLastLogin" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Version">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="VersionNumber" Type="int" />
+        </EntityType>
+        <Association Name="FK__message__created__0519C6AF">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="message" Type="Self.message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="message">
+              <PropertyRef Name="createdBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__message__sentTo__060DEAE8">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="message" Type="Self.message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="message">
+              <PropertyRef Name="sentTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__newsboard__creat__0AD2A005">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="newsboard" Type="Self.newsboard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="newsboard">
+              <PropertyRef Name="createdBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__reservati__creat__0F975522">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="reservation" Type="Self.reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="reservation">
+              <PropertyRef Name="createdBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CabinWebsiteModelStoreContainer">
+          <EntitySet Name="message" EntityType="Self.message" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="newsboard" EntityType="Self.newsboard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="reservation" EntityType="Self.reservation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Version" EntityType="Self.Version" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__message__created__0519C6AF" Association="Self.FK__message__created__0519C6AF">
+            <End Role="user" EntitySet="user" />
+            <End Role="message" EntitySet="message" />
+          </AssociationSet>
+          <AssociationSet Name="FK__message__sentTo__060DEAE8" Association="Self.FK__message__sentTo__060DEAE8">
+            <End Role="user" EntitySet="user" />
+            <End Role="message" EntitySet="message" />
+          </AssociationSet>
+          <AssociationSet Name="FK__newsboard__creat__0AD2A005" Association="Self.FK__newsboard__creat__0AD2A005">
+            <End Role="user" EntitySet="user" />
+            <End Role="newsboard" EntitySet="newsboard" />
+          </AssociationSet>
+          <AssociationSet Name="FK__reservati__creat__0F975522" Association="Self.FK__reservati__creat__0F975522">
+            <End Role="user" EntitySet="user" />
+            <End Role="reservation" EntitySet="reservation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CabinWebsiteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="message">
+          <Key>
+            <PropertyRef Name="messageID" />
+          </Key>
+          <Property Name="messageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="55" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="body" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createdBy" Type="Int32" Nullable="false" />
+          <Property Name="sentTo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="Self.FK__message__created__0519C6AF" FromRole="message" ToRole="user" />
+          <NavigationProperty Name="user1" Relationship="Self.FK__message__sentTo__060DEAE8" FromRole="message" ToRole="user" />
+        </EntityType>
+        <EntityType Name="newsboard">
+          <Key>
+            <PropertyRef Name="newsboardID" />
+          </Key>
+          <Property Name="newsboardID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="55" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="body" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createdBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="Self.FK__newsboard__creat__0AD2A005" FromRole="newsboard" ToRole="user" />
+        </EntityType>
+        <EntityType Name="reservation">
+          <Key>
+            <PropertyRef Name="reservationID" />
+          </Key>
+          <Property Name="reservationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="reservationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createdBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="Self.FK__reservati__creat__0F975522" FromRole="reservation" ToRole="user" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="vendorCode" Type="Int32" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="55" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="firstName" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="lastName" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Int32" Nullable="false" />
+          <Property Name="lastLogin" Type="DateTime" Precision="3" />
+          <Property Name="prevLastLogin" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="messages" Relationship="Self.FK__message__created__0519C6AF" FromRole="user" ToRole="message" />
+          <NavigationProperty Name="messages1" Relationship="Self.FK__message__sentTo__060DEAE8" FromRole="user" ToRole="message" />
+          <NavigationProperty Name="newsboards" Relationship="Self.FK__newsboard__creat__0AD2A005" FromRole="user" ToRole="newsboard" />
+          <NavigationProperty Name="reservations" Relationship="Self.FK__reservati__creat__0F975522" FromRole="user" ToRole="reservation" />
+        </EntityType>
+        <EntityType Name="Version">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VersionNumber" Type="Int32" />
+        </EntityType>
+        <Association Name="FK__message__created__0519C6AF">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="message" Type="Self.message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="message">
+              <PropertyRef Name="createdBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__message__sentTo__060DEAE8">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="message" Type="Self.message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="message">
+              <PropertyRef Name="sentTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__newsboard__creat__0AD2A005">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="newsboard" Type="Self.newsboard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="newsboard">
+              <PropertyRef Name="createdBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__reservati__creat__0F975522">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="reservation" Type="Self.reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="reservation">
+              <PropertyRef Name="createdBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CabinWebsiteEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="messages" EntityType="Self.message" />
+          <EntitySet Name="newsboards" EntityType="Self.newsboard" />
+          <EntitySet Name="reservations" EntityType="Self.reservation" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <EntitySet Name="Versions" EntityType="Self.Version" />
+          <AssociationSet Name="FK__message__created__0519C6AF" Association="Self.FK__message__created__0519C6AF">
+            <End Role="user" EntitySet="users" />
+            <End Role="message" EntitySet="messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__message__sentTo__060DEAE8" Association="Self.FK__message__sentTo__060DEAE8">
+            <End Role="user" EntitySet="users" />
+            <End Role="message" EntitySet="messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__newsboard__creat__0AD2A005" Association="Self.FK__newsboard__creat__0AD2A005">
+            <End Role="user" EntitySet="users" />
+            <End Role="newsboard" EntitySet="newsboards" />
+          </AssociationSet>
+          <AssociationSet Name="FK__reservati__creat__0F975522" Association="Self.FK__reservati__creat__0F975522">
+            <End Role="user" EntitySet="users" />
+            <End Role="reservation" EntitySet="reservations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CabinWebsiteModelStoreContainer" CdmEntityContainer="CabinWebsiteEntities">
+          <EntitySetMapping Name="messages">
+            <EntityTypeMapping TypeName="CabinWebsiteModel.message">
+              <MappingFragment StoreEntitySet="message">
+                <ScalarProperty Name="messageID" ColumnName="messageID" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="body" ColumnName="body" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="sentTo" ColumnName="sentTo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="newsboards">
+            <EntityTypeMapping TypeName="CabinWebsiteModel.newsboard">
+              <MappingFragment StoreEntitySet="newsboard">
+                <ScalarProperty Name="newsboardID" ColumnName="newsboardID" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="body" ColumnName="body" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="reservations">
+            <EntityTypeMapping TypeName="CabinWebsiteModel.reservation">
+              <MappingFragment StoreEntitySet="reservation">
+                <ScalarProperty Name="reservationID" ColumnName="reservationID" />
+                <ScalarProperty Name="reservationDate" ColumnName="reservationDate" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="CabinWebsiteModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="vendorCode" ColumnName="vendorCode" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="lastLogin" ColumnName="lastLogin" />
+                <ScalarProperty Name="prevLastLogin" ColumnName="prevLastLogin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Versions">
+            <EntityTypeMapping TypeName="CabinWebsiteModel.Version">
+              <MappingFragment StoreEntitySet="Version">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="VersionNumber" ColumnName="VersionNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

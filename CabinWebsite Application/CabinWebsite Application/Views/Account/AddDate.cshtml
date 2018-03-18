@@ -1,0 +1,75 @@
+﻿@model CabinWebsite_Application.Models.NewReservedModel
+
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-xs-8 col-xs-offset-2">
+        <h2 id="add-item-title" class="text-center">Add a New Reservation</h2>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            if (!ViewData.ModelState.IsValid)
+            {
+                <div class="validation-summary-errors panel panel-danger"
+                     data-valmsg-summary="true">
+                    <div class="panel-heading">
+                        <center><strong>Cannot add this Story. Please try again later</strong></center>
+                    </div>
+                </div><br />
+            }       
+            @*
+    <div class="row">
+        <div class="form-group">
+            <div class="col-lg-3 col-md-3 col-xs-12">
+                <p>Do you wish to reserve @Model.reservedDate</p>
+            </div>
+        </div>
+    </div>
+            *@
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-lg-3 col-md-3 col-xs-12">
+                        @Html.LabelFor(m => m.year, new { @class = "control-label transaction-label" })
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-xs-12">
+                        @Html.TextAreaFor(m => m.year, new { @class = "form-control", @placeholder = "year", @rows = "4", @cols = "40", @id = "titleInput" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-lg-3 col-md-3 col-xs-12">
+                        @Html.LabelFor(m => m.month, new { @class = "control-label transaction-label" })
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-xs-12">
+                        @Html.TextAreaFor(m => m.month, new { @class = "form-control", @placeholder = "month", @rows = "4", @cols = "40", @id = "bodyInput" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-lg-3 col-md-3 col-xs-12">
+                     @Html.LabelFor(m => m.day, new { @class = "control-label transaction-label" })
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-xs-12">
+                        @Html.TextAreaFor(m => m.day, new { @class = "form-control", @placeholder = "day", @rows = "4", @cols = "40", @id = "bodyInput" })
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-lg-12 col-md-12 col-xs-12" style="text-align:center;">
+                        <button class="btn btn-primary" type="submit" value="Submit">Submit</button>
+                        <button class="btn btn-default" onclick="confirmBack()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+        }
+
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
